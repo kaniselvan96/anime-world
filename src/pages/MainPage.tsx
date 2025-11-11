@@ -1,18 +1,35 @@
-import React, { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AWSearchBar from "../components/molecules/SearchBar";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxHook";
 import { fetchAnimes } from "../redux/animeSlice";
 import { AnimeList } from "../components/organisms/AnimeList";
 import { Box } from "@mui/material";
+import { useNavigation } from "../hooks/useNavigation";
+import { debounce } from "lodash";
 
 const MainPage = () => {
-  // const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState<string>("");
   const dispatch = useAppDispatch();
+  const { clickToNavigate } = useNavigation();
   const { list, loading } = useAppSelector((state) => state.anime);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const debouncedSearch = useMemo(() => {
+    return debounce(handleSearch, 1000);
+  }, []);
+
   useEffect(() => {
-    dispatch(fetchAnimes("with knife"));
-  }, [dispatch]);
+    dispatch(fetchAnimes(searchValue));
+  }, [dispatch, searchValue]);
+
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   return (
     <Box
@@ -24,15 +41,10 @@ const MainPage = () => {
         gap: 20,
       }}
     >
-      <AWSearchBar
-        label="Search Anime"
-        onSearch={(e) => {
-          console.log("Search: ", e.target.value);
-        }}
-      />
+      <AWSearchBar label="Search Anime" onSearch={debouncedSearch} />
       <AnimeList
         animes={list}
-        onSelect={(id) => console.log("Clicked : ", id)}
+        onSelect={(id) => clickToNavigate(`/anime/${id}`)}
         isLoading={loading}
       />
     </Box>

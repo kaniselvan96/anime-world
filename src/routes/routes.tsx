@@ -6,21 +6,23 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import MainPage from "../pages/MainPage";
+import DetailsPage from "../pages/DetailsPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      { index: true, element: <Navigate to="/anime" replace /> },
       {
-        index: true,
+        path: "anime",
         element: <MainPage />,
       },
       {
         path: "anime/:id",
-        element: <MainPage />,
+        element: <DetailsPage />,
       },
-      { path: "*", element: <Navigate to="/" replace /> },
+      { path: "*", element: <Navigate to="/anime" replace /> },
     ],
   },
 ]);

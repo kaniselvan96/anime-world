@@ -15,8 +15,8 @@ const AnimeCard = ({
   anime,
   onClick,
   isLoading = false,
-  height = "350",
-  width = "250",
+  height = "350px",
+  width = "250px",
 }: AnimeCardPropsType) => {
   if (isLoading)
     return (
@@ -32,7 +32,7 @@ const AnimeCard = ({
     return (
       <Card
         sx={{ height: height, width: width, cursor: "pointer" }}
-        onClick={() => onClick?.(anime.id)}
+        onClick={() => onClick?.(anime.mal_id)}
       >
         <AWImage src={anime?.images?.jpg?.image_url} alt={"anime-image"} />
         <CardContent>

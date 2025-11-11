@@ -10,7 +10,7 @@ interface AnimeListProps {
 }
 
 const EmptyAnime = {
-  id: 0,
+  mal_id: 0,
   title: "",
   images: {
     jpg: {
@@ -24,7 +24,7 @@ const EmptyAnime = {
 export const AnimeList = ({
   animes,
   onSelect,
-  isLoading = false,
+  isLoading = true,
 }: AnimeListProps) => (
   <Box
     style={{
@@ -46,7 +46,7 @@ export const AnimeList = ({
       </>
     ) : (
       animes.map((anime) => (
-        <Box key={anime.id}>
+        <Box key={anime.mal_id}>
           <AnimeCard anime={anime} onClick={onSelect} />
         </Box>
       ))

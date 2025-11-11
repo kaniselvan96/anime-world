@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Anime } from "../types/anime";
-import { fetchAnimeList } from "../services/animeService";
+import { fetchAnimeById, fetchAnimeList } from "../services/animeService";
 
 type AnimeState = {
   list: Anime[];
+  selectedAnime?: Anime;
   loading: boolean;
   error: string | null;
 };
@@ -11,6 +12,7 @@ type AnimeState = {
 // Initial state
 const initialState: AnimeState = {
   list: [],
+  selectedAnime: undefined,
   loading: false,
   error: null,
 };
@@ -20,6 +22,14 @@ export const fetchAnimes = createAsyncThunk(
   "anime/fetchAnimes",
   async (query: string): Promise<Anime[]> => {
     const data = await fetchAnimeList(query);
+    return data;
+  }
+);
+
+export const fetchAnime = createAsyncThunk(
+  "anime/fetchAnimeById",
+  async (id: number): Promise<Anime> => {
+    const data = await fetchAnimeById(id);
     return data;
   }
 );
@@ -39,6 +49,20 @@ const animeSlice = createSlice({
         state.list = action.payload;
       })
       .addCase(fetchAnimes.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Something went wrong";
+      })
+
+      // AnimeById
+      .addCase(fetchAnime.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAnime.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedAnime = action.payload;
+      })
+      .addCase(fetchAnime.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something went wrong";
       });
