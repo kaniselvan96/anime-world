@@ -1,4 +1,7 @@
+import type { Pagination } from "./pagination";
+
 export interface Anime {
+  id?: number;
   mal_id: number;
   title: string;
   images: {
@@ -10,4 +13,10 @@ export interface Anime {
   };
   rating?: number;
   synopsis?: string;
+  year?: string | number;
+}
+
+export interface AnimeListResponse {
+  data: Anime[];
+  pagination: Pagination;
 }

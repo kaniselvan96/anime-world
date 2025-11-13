@@ -7,6 +7,7 @@ import {
 import App from "../App";
 import MainPage from "../pages/MainPage";
 import DetailsPage from "../pages/DetailsPage";
+import FavouritesPage from "../pages/FavouritesPage";
 
 const routes = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const routes = createBrowserRouter([
       {
         path: "anime/:id",
         element: <DetailsPage />,
+      },
+      {
+        path: "anime/favourites",
+        element: <FavouritesPage />,
       },
       { path: "*", element: <Navigate to="/anime" replace /> },
     ],

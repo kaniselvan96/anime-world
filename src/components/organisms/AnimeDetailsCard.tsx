@@ -36,8 +36,13 @@ const AnimeDetailsCard = ({
               isLoading={isLoading}
             />
             <AnimeInfoRow
+              label="Year"
+              text={anime?.year ?? "-"}
+              isLoading={isLoading}
+            />
+            <AnimeInfoRow
               label="Rating"
-              text={anime?.rating ?? ""}
+              text={anime?.rating ?? "-"}
               isLoading={isLoading}
             />
             <AWText

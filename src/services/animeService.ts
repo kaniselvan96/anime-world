@@ -1,19 +1,18 @@
 import axios from "axios";
-import type { Anime } from "../types/anime";
-
-interface AnimeListResponse {
-  data: Anime[];
-}
+import type { Anime, AnimeListResponse } from "../types/anime";
 
 interface AnimeDetailResponse {
   data: Anime; // single object
 }
 
-export const fetchAnimeList = async (query: string): Promise<Anime[]> => {
+export const fetchAnimeList = async (
+  query: string,
+  page: number = 1
+): Promise<AnimeListResponse> => {
   const res = await axios.get<AnimeListResponse>(
-    `https://api.jikan.moe/v4/anime?q=${query}`
+    `https://api.jikan.moe/v4/anime?q=${query}&page=${page}`
   );
-  return res.data.data;
+  return res.data;
 };
 
 export const fetchAnimeById = async (id: number): Promise<Anime> => {
@@ -23,9 +22,11 @@ export const fetchAnimeById = async (id: number): Promise<Anime> => {
   return res.data.data;
 };
 
-export const fetchTopAnimeList = async (): Promise<Anime[]> => {
+export const fetchTopAnimeList = async (
+  page: number
+): Promise<AnimeListResponse> => {
   const res = await axios.get<AnimeListResponse>(
-    `https://api.jikan.moe/v4/top/anime`
+    `https://api.jikan.moe/v4/top/anime?page=${page}`
   );
-  return res.data.data;
+  return res.data;
 };

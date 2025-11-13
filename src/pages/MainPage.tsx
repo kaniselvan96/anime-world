@@ -2,16 +2,17 @@ import { useEffect, useMemo, useState } from "react";
 import AWSearchBar from "../components/molecules/SearchBar";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxHook";
 import { fetchAnimes } from "../redux/animeSlice";
-import { AnimeList } from "../components/organisms/AnimeList";
 import { Box } from "@mui/material";
 import { useNavigation } from "../hooks/useNavigation";
 import { debounce } from "lodash";
+import AnimeList from "../components/organisms/AnimeList";
 
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { clickToNavigate } = useNavigation();
-  const { list, loading } = useAppSelector((state) => state.anime);
+  const { list, pagination, loading } = useAppSelector((state) => state.anime);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -22,8 +23,8 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchAnimes(searchValue));
-  }, [dispatch, searchValue]);
+    dispatch(fetchAnimes({ query: searchValue, page }));
+  }, [dispatch, searchValue, page]);
 
   useEffect(() => {
     return () => {
@@ -48,6 +49,8 @@ const MainPage = () => {
         onSelect={(id) => clickToNavigate(`/anime/${id}`)}
         isLoading={loading}
         title={searchValue ? "Searched Animes :" : "Top Animes List :"}
+        pagination={pagination}
+        setPage={setPage}
       />
     </Box>
   );
