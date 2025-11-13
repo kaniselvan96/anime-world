@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# Welcome to Anime Search World 🎌
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Anime Search World is a simple and elegant anime search application built using modern web technologies. It allows users to browse anime, view detailed information, paginate results, and even save favourite anime — all in a clean and responsive UI.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [Anime Search World Live Preview](https://animeworldsearch.netlify.app/anime).
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** – UI Library
+- **TypeScript** – Type-safe development
+- **Redux** – State management
+- **Axios** – API fetching
+- **Material-UI (MUI)** – UI components
+- **React Router** – Navigation
+- **LocalStorage** – Persistent user data
 
-## Expanding the ESLint configuration
+## Deployment:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Hosted on **Netlify**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧩 Project Architecture — Atomic Design
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This project follows the Atomic File Structure, organizing UI into:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Atoms** – Small, reusable components (buttons, text, images)
+- **Molecules** – Composed elements such as search bars or card layouts
+- **Organisms** – Complex UI structures (anime lists, headers)
+- **Pages** – Full screens rendered via routing
+
+Why Atomic Design?
+
+- Encourages reusability
+- Reduces duplicated UI
+- Makes components cleaner and easier to maintain
+- Scales well as the app grows
+
+# ✨ Features
+
+## 🔍 Search Anime
+
+- Search for anime using keywords powered by the Jikan API.
+
+## 🧭 Navbar Navigation
+
+- Smooth navigation between pages.
+
+## 📄 View Anime Details
+
+- Click any anime card to view more detailed information.
+
+## 📑 Pagination
+
+- Results are paginated for a cleaner browsing experience.
+
+# ⭐ Bonus Implementation
+
+## ❤️ Favourites List
+
+- Add anime to your favourites, stored in localStorage so they stay even after a refresh.
+
+# 📦 Installation & Setup
+
 ```
+# Clone the repository
+git clone https://github.com/your-username/anime-world.git
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Navigate into the project
+cd anime-world
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Install dependencies
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start the development server
+npm run dev
+
 ```
