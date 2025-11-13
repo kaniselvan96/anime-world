@@ -41,11 +41,13 @@ const MainPage = () => {
         gap: 10,
       }}
     >
-      <AWSearchBar label="Search Anime" onSearch={debouncedSearch} />
+      <AWSearchBar label="Search anime by title" onSearch={debouncedSearch} />
+
       <AnimeList
         animes={list}
         onSelect={(id) => clickToNavigate(`/anime/${id}`)}
         isLoading={loading}
+        title={searchValue ? "Searched Animes :" : "Top Animes List :"}
       />
     </Box>
   );

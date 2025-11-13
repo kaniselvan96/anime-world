@@ -22,3 +22,10 @@ export const fetchAnimeById = async (id: number): Promise<Anime> => {
   );
   return res.data.data;
 };
+
+export const fetchTopAnimeList = async (): Promise<Anime[]> => {
+  const res = await axios.get<AnimeListResponse>(
+    `https://api.jikan.moe/v4/top/anime`
+  );
+  return res.data.data;
+};

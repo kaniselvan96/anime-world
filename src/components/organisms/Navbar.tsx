@@ -1,5 +1,5 @@
 import { AppBar, Toolbar } from "@mui/material";
-import { AWText } from "../atoms/Text/AWText";
+import AWText from "../atoms/Text/AWText";
 
 const Navbar = () => {
   return (

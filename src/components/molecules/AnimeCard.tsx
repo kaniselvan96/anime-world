@@ -1,7 +1,7 @@
 import { Card, CardContent, Skeleton, type CardProps } from "@mui/material";
 import type { Anime } from "../../types/anime";
 import AWImage from "../atoms/Image/AWImage";
-import { AWText } from "../atoms/Text/AWText";
+import AWText from "../atoms/Text/AWText";
 
 type AnimeCardPropsType = CardProps & {
   anime: Anime;

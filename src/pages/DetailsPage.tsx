@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useReduxHook";
 import { fetchAnime } from "../redux/animeSlice";
 import AnimeDetailsCard from "../components/organisms/AnimeDetailsCard";
+import { Box } from "@mui/material";
 
 const DetailsPage = () => {
   const dispatch = useAppDispatch();
@@ -13,12 +14,12 @@ const DetailsPage = () => {
     dispatch(fetchAnime(Number(id)));
   }, [dispatch, id]);
   return (
-    <div>
+    <Box style={{ display: "flex", justifyContent: "center" }}>
       <AnimeDetailsCard
         anime={selectedAnime || undefined}
         isLoading={loading}
       />
-    </div>
+    </Box>
   );
 };
 

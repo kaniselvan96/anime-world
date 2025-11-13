@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Anime } from "../types/anime";
-import { fetchAnimeById, fetchAnimeList } from "../services/animeService";
+import {
+  fetchAnimeById,
+  fetchAnimeList,
+  fetchTopAnimeList,
+} from "../services/animeService";
 
 type AnimeState = {
   list: Anime[];
@@ -21,8 +25,13 @@ const initialState: AnimeState = {
 export const fetchAnimes = createAsyncThunk(
   "anime/fetchAnimes",
   async (query: string): Promise<Anime[]> => {
-    const data = await fetchAnimeList(query);
-    return data;
+    if (query) {
+      const data = await fetchAnimeList(query);
+      return data;
+    } else {
+      const data = await fetchTopAnimeList();
+      return data;
+    }
   }
 );
 
