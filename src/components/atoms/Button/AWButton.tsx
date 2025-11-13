@@ -1,11 +1,11 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { Button } from "@mui/material";
 import type { ButtonProps } from "@mui/material";
 
 type AWButtonProps = ButtonProps & {
-  label: React.ReactNode;
+  label: ReactNode;
 };
-const AWButton: React.FC<AWButtonProps> = ({ label, ...props }) => {
+const AWButton = ({ label, ...props }: AWButtonProps) => {
   return (
     <Button variant="contained" {...props}>
       {label}

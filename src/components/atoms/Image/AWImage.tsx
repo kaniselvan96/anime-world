@@ -1,5 +1,4 @@
 import { CardMedia } from "@mui/material";
-import React from "react";
 
 type ImagePropsType = {
   src: string;

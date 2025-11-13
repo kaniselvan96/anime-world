@@ -18,7 +18,7 @@ const MainPage = () => {
   };
 
   const debouncedSearch = useMemo(() => {
-    return debounce(handleSearch, 1000);
+    return debounce(handleSearch, 250);
   }, []);
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const MainPage = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         alignItems: "center",
-        gap: 20,
+        gap: 10,
       }}
     >
       <AWSearchBar label="Search Anime" onSearch={debouncedSearch} />
