@@ -16,6 +16,7 @@ const MainPage = () => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
+    setPage(1);
   };
 
   const debouncedSearch = useMemo(() => {
