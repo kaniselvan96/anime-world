@@ -1,10 +1,13 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import {
+  DotLottieReact,
+  type DotLottieReactProps,
+} from "@lottiefiles/dotlottie-react";
 
-type AWLottieGifPropsType = {
+type AWLottieGifPropsType = DotLottieReactProps & {
   src: string;
 };
-const AWLottieGif = ({ src }: AWLottieGifPropsType) => {
-  return <DotLottieReact src={src} loop autoplay />;
+const AWLottieGif = ({ src, ...props }: AWLottieGifPropsType) => {
+  return <DotLottieReact src={src} loop autoplay {...props} />;
 };
 
 export default AWLottieGif;

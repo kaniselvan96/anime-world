@@ -19,6 +19,7 @@ import {
   removeFromLocalStorage,
 } from "../../utils/localStorage";
 import { useEffect, useState } from "react";
+import AWLottieGif from "../atoms/Image/AWLottieGif";
 
 type AnimeCardPropsType = CardProps & {
   anime: Anime;
@@ -37,6 +38,7 @@ const AnimeCard = ({
   width = "250px",
 }: AnimeCardPropsType) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [playAnimation, setPlayAnimation] = useState(false);
 
   const toggleFavorite = () => {
     if (isFavorite) {
@@ -46,6 +48,9 @@ const AnimeCard = ({
         id: anime?.mal_id,
         ...anime,
       });
+      // Trigger animation when adding to favorites
+      setPlayAnimation(true);
+      setTimeout(() => setPlayAnimation(false), 2300);
     }
     setIsFavorite(!isFavorite);
   };
@@ -71,7 +76,12 @@ const AnimeCard = ({
         sx={{ height: height, width: width, cursor: "pointer" }}
         onClick={() => onClick?.(anime.mal_id)}
       >
-        <AWImage src={anime?.images?.jpg?.image_url} alt={"anime-image"} />
+        {playAnimation ? (
+          <AWLottieGif src="https://lottie.host/0dc01cbc-05fa-4115-9356-bfcde5aa9fc8/q1HI8448v9.lottie" />
+        ) : (
+          <AWImage src={anime?.images?.jpg?.image_url} alt={"anime-image"} />
+        )}
+
         <CardContent>
           <Tooltip title={anime?.title}>
             <AWText
@@ -90,6 +100,11 @@ const AnimeCard = ({
             />
           </Tooltip>
           <AWText text={anime?.year ?? "-"} variant="body1" />
+          {/* {playAnimation && (
+            <Box>
+              <AWLottieGif src="https://lottie.host/915372a3-5c9a-43d2-9ae5-7e686b3bf659/XFxRcF8Ob1.lottie" />
+            </Box>
+          )} */}
         </CardContent>
         <CardActions sx={{ alignItems: "end", justifyContent: "end" }}>
           <AWButton
