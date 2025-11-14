@@ -7,6 +7,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { debounce } from "lodash";
 import AnimeList from "../components/organisms/AnimeList";
 import PageLoader from "../components/organisms/PageLoader";
+import ErrorPageTemplate from "../components/templates/ErrorPageTemplate";
 
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -36,6 +37,8 @@ const MainPage = () => {
     };
   }, [debouncedSearch]);
 
+  if (error) return <ErrorPageTemplate />;
+
   return (
     <Box
       sx={{
@@ -51,24 +54,17 @@ const MainPage = () => {
         duration={3500}
         sessionKey="hasVisitedSite"
       />
-      {error ? (
-        <></>
-      ) : (
-        <>
-          <AWSearchBar
-            label="Search anime by title"
-            onSearch={debouncedSearch}
-          />
-          <AnimeList
-            animes={list}
-            onSelect={(id) => clickToNavigate(`/anime/${id}`)}
-            isLoading={loading}
-            title={searchValue ? "Searched Animes :" : "Top Animes List :"}
-            pagination={pagination}
-            setPage={setPage}
-          />
-        </>
-      )}
+      <>
+        <AWSearchBar label="Search anime by title" onSearch={debouncedSearch} />
+        <AnimeList
+          animes={list}
+          onSelect={(id) => clickToNavigate(`/anime/${id}`)}
+          isLoading={loading}
+          title={searchValue ? "Searched Animes :" : "Top Animes List :"}
+          pagination={pagination}
+          setPage={setPage}
+        />
+      </>
     </Box>
   );
 };

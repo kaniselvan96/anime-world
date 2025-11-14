@@ -100,11 +100,6 @@ const AnimeCard = ({
             />
           </Tooltip>
           <AWText text={anime?.year ?? "-"} variant="body1" />
-          {/* {playAnimation && (
-            <Box>
-              <AWLottieGif src="https://lottie.host/915372a3-5c9a-43d2-9ae5-7e686b3bf659/XFxRcF8Ob1.lottie" />
-            </Box>
-          )} */}
         </CardContent>
         <CardActions sx={{ alignItems: "end", justifyContent: "end" }}>
           <AWButton

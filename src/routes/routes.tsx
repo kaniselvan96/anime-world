@@ -7,6 +7,7 @@ import App from "../App";
 import MainPage from "../pages/MainPage";
 import DetailsPage from "../pages/DetailsPage";
 import FavouritesPage from "../pages/FavouritesPage";
+import ErrorPageTemplate from "../components/templates/ErrorPageTemplate";
 
 const routes = createBrowserRouter([
   {
@@ -26,7 +27,10 @@ const routes = createBrowserRouter([
         path: "anime/favourites",
         element: <FavouritesPage />,
       },
-      { path: "*", element: <Navigate to="/anime" replace /> },
+      {
+        path: "*",
+        element: <ErrorPageTemplate text={"Oops, Page Not Found"} />,
+      },
     ],
   },
 ]);
