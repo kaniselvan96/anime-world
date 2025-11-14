@@ -11,8 +11,6 @@ const FavouritesPage = () => {
   const favorites = getLocalStorage<Anime>(FAVORITES_KEY);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const duration = 3500;
-  const hasVisitedSite = sessionStorage.getItem("hasVisitedSite");
-  console.log("🚀 >> FavouritesPage >> hasVisitedSite:", hasVisitedSite);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +20,7 @@ const FavouritesPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (showLoader && hasVisitedSite)
+  if (showLoader)
     return (
       <Box
         sx={{
