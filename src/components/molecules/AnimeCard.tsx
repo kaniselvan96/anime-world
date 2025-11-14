@@ -6,6 +6,8 @@ import {
   Tooltip,
   type CardProps,
 } from "@mui/material";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import type { Anime } from "../../types/anime";
 import AWImage from "../atoms/Image/AWImage";
 import AWText from "../atoms/Text/AWText";
@@ -77,19 +79,28 @@ const AnimeCard = ({
               variant="body1"
               sx={{
                 display: "-webkit-box",
-                WebkitLineClamp: 1,
+                WebkitLineClamp: 2,
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
                 fontWeight: "800",
+                lineHeight: "1.4",
+                height: "2.8em",
+                maxHeight: "2.8em",
               }}
             />
           </Tooltip>
           <AWText text={anime?.year ?? "-"} variant="body1" />
         </CardContent>
-        <CardActions sx={{ alignItems: "end" }}>
+        <CardActions sx={{ alignItems: "end", justifyContent: "end" }}>
           <AWButton
-            label="Favourites"
-            variant={isFavorite ? "contained" : "outlined"}
+            isIconButton={true}
+            label={
+              isFavorite ? (
+                <FavoriteOutlinedIcon />
+              ) : (
+                <FavoriteBorderOutlinedIcon />
+              )
+            }
             size="small"
             onClick={(e) => {
               e.preventDefault();

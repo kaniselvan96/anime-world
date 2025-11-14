@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import { useNavigation } from "../hooks/useNavigation";
 import { debounce } from "lodash";
 import AnimeList from "../components/organisms/AnimeList";
+import PageLoader from "../components/organisms/PageLoader";
 
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -43,6 +44,11 @@ const MainPage = () => {
         gap: 10,
       }}
     >
+      <PageLoader
+        src="https://lottie.host/66d176db-ea78-47f8-aa20-0c1a8be1878f/lgcLltfbxz.lottie"
+        duration={3500}
+        sessionKey="hasVisitedSite"
+      />
       <AWSearchBar label="Search anime by title" onSearch={debouncedSearch} />
 
       <AnimeList
