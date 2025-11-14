@@ -4,15 +4,21 @@ import { useAppDispatch, useAppSelector } from "../hooks/useReduxHook";
 import { fetchAnime } from "../redux/animeSlice";
 import AnimeDetailsCard from "../components/organisms/AnimeDetailsCard";
 import { Box } from "@mui/material";
+import ErrorPageTemplate from "../components/templates/ErrorPageTemplate";
 
 const DetailsPage = () => {
   const dispatch = useAppDispatch();
-  const { selectedAnime, loading } = useAppSelector((state) => state.anime);
+  const { selectedAnime, loading, error } = useAppSelector(
+    (state) => state.anime
+  );
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     dispatch(fetchAnime(Number(id)));
   }, [dispatch, id]);
+
+  if (error) return <ErrorPageTemplate />;
+
   return (
     <Box style={{ display: "flex", justifyContent: "center" }}>
       <AnimeDetailsCard

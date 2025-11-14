@@ -24,7 +24,7 @@ const routes = createBrowserRouter([
         element: <DetailsPage />,
       },
       {
-        path: "anime/favourites",
+        path: "/favourites",
         element: <FavouritesPage />,
       },
       {

@@ -10,7 +10,7 @@ const Navbar = () => {
   const currentPath = location.pathname;
   const menuList = [
     { label: "Home", url: "/anime" },
-    { label: "Favourites", url: "/anime/favourites" },
+    { label: "Favourites", url: "/favourites" },
   ];
   return (
     <AppBar
