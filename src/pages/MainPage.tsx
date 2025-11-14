@@ -13,7 +13,9 @@ const MainPage = () => {
   const [page, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { clickToNavigate } = useNavigation();
-  const { list, pagination, loading } = useAppSelector((state) => state.anime);
+  const { list, pagination, loading, error } = useAppSelector(
+    (state) => state.anime
+  );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -49,16 +51,24 @@ const MainPage = () => {
         duration={3500}
         sessionKey="hasVisitedSite"
       />
-      <AWSearchBar label="Search anime by title" onSearch={debouncedSearch} />
-
-      <AnimeList
-        animes={list}
-        onSelect={(id) => clickToNavigate(`/anime/${id}`)}
-        isLoading={loading}
-        title={searchValue ? "Searched Animes :" : "Top Animes List :"}
-        pagination={pagination}
-        setPage={setPage}
-      />
+      {error ? (
+        <></>
+      ) : (
+        <>
+          <AWSearchBar
+            label="Search anime by title"
+            onSearch={debouncedSearch}
+          />
+          <AnimeList
+            animes={list}
+            onSelect={(id) => clickToNavigate(`/anime/${id}`)}
+            isLoading={loading}
+            title={searchValue ? "Searched Animes :" : "Top Animes List :"}
+            pagination={pagination}
+            setPage={setPage}
+          />
+        </>
+      )}
     </Box>
   );
 };
